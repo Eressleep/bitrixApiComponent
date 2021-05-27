@@ -17,11 +17,11 @@ Array
     [status] => success
     [data] => Array
         (
-            [name] => Сергей
-            [surname] => Олеговна
+            [name] 	 => Сергей
+            [surname] 	 => Олеговна
             [patronymic] => Олеговна
-            [mail] => ivanov@microsoft.com
-            [login] => ivan
+            [mail] 	 => ivanov@microsoft.com
+            [login] 	 => ivan
         )
 )
 ```
