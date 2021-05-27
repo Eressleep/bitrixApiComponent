@@ -48,7 +48,8 @@ $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 );
 ```
 ### Пример возвращение данных
-```Array
+```
+Array
 (
     [status] => success
 )
@@ -65,7 +66,8 @@ $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 );
 ```
 ### Пример возвращение данных
-```Array
+```
+Array
 (
     [status] => success
 )

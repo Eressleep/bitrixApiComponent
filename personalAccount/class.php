@@ -103,5 +103,4 @@ class personalAccount extends CBitrixComponent
 		unset($this->arResult['dataObj']);
 		$this::IncludeComponentTemplate();
 	}
-
 }
