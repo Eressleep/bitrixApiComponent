@@ -85,11 +85,11 @@ class personalAccount extends CBitrixComponent
 	{
 		$requestMethod = \Bitrix\Main\Context::getCurrent()->getRequest()->getRequestMethod();
 
-		if ($requestMethod === 'GET')
+		if ($this->arParams['methodRequest'] === 'GET')
 			$this->getUserById();
-		elseif (sizeof($this->arParams['changeUserData']) > 0 and $requestMethod === 'POST')
+		elseif (sizeof($this->arParams['changeUserData']) > 0 and $this->arParams['methodRequest'] === 'POST')
 			$this->setUserData();
-		elseif ($requestMethod === 'DELETE')
+		elseif ($this->arParams['methodRequest'] === 'DELETE')
 			$this->deleteUserById();
 		else
 		{

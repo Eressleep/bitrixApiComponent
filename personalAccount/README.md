@@ -5,8 +5,9 @@ GET /api/personalAccount
 $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 	'',
 	[
-		'id'   => 123,                   - id пользователя
-		'json' => false,                 - возвращать json
+		'id'             => 123,                   - id пользователя
+		'methodRequest'  => \Bitrix\Main\Context::getCurrent()->getRequest()->getRequestMethod()
+		'json'           => false,                 - возвращать json
 	]
 );
 ```
@@ -34,6 +35,7 @@ $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 	'',
 	[
 		'id'   => 123,                   - id пользователя
+		'methodRequest'  => \Bitrix\Main\Context::getCurrent()->getRequest()->getRequestMethod()
 		'changeUserData' =>
 		[
 			'name'       => '123Zalupa',
@@ -59,8 +61,9 @@ DELETE /api/personalAccount
 $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 	'',
 	[
-		'id'   => 123,                   - id пользователя
-		'json' => false,                 - возвращать json
+		'id'             => 123,                   - id пользователя
+		'methodRequest'  => \Bitrix\Main\Context::getCurrent()->getRequest()->getRequestMethod()
+		'json'           => false,                 - возвращать json
 	]
 );
 ```
