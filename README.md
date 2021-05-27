@@ -40,7 +40,7 @@ $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 			'surname'    => 'asd dsadsad',
 			'patronymic' => 'dsadsad',
 			'mail'       => 'asd@sad.ru',
-			'login'      => 5,
+			'login'      => 'ssss',
 		],
 		'json' => false,                 - возвращать json
 	]
