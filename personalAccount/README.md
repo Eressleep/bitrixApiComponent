@@ -54,7 +54,7 @@ Array
     [status] => success
 )
 ```
-## Принимаемые параметры для удаления данных
+## Принимаемые параметры для удаления пользователя
 DELETE /api/personalAccount
 ```
 $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
