@@ -18,7 +18,7 @@ Array
     [data] => Array
         (
             [name] 	 => Сергей
-            [surname] 	 => Олеговна
+            [surname] 	 => Иванов
             [patronymic] => Олеговна
             [mail] 	 => ivanov@microsoft.com
             [login] 	 => ivan
