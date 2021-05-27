@@ -1,6 +1,7 @@
 # Компонент личные данные пользователя
 
 ## Принимаемые параметры для получения данных
+GET /api/personalAccount
 ```
 $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 	'',
@@ -15,7 +16,7 @@ $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 Array
 (
     [status] => success
-    [data]   => Array
+    [data] => Array
         (
             [name] 	 => Сергей
             [surname] 	 => Иванов
@@ -25,15 +26,15 @@ Array
         )
 )
 ```
-
-
 ## Принимаемые параметры для изменения данных
 ### Валидирует данные, в случае ошибки вернет массив error
+POST /api/personalAccount
+
 ```
 $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 	'',
 	[
-		'id'   		 => 123,                   - id пользователя
+		'id'   => 123,                   - id пользователя
 		'changeUserData' =>
 		[
 			'name'       => '123Zalupa',
@@ -42,19 +43,30 @@ $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 			'mail'       => 'asd@sad.ru',
 			'login'      => 'ssss',
 		],
-		'json' => false,                           - возвращать json
+		'json' => false,                 - возвращать json
 	]
 );
 ```
-## Пример возвращение данных
-```
-Array
+### Пример возвращение данных
+```Array
 (
-    [status] => fail
-    [error]  => Array
-        (
-            [name]    => Invalid name 123Zalupa
-            [surname] => Invalid surname asd dsadsad
-        )
+    [status] => success
+)
+```
+## Принимаемые параметры для удаления данных
+DELETE /api/personalAccount
+```
+$APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
+	'',
+	[
+		'id'   => 123,                   - id пользователя
+		'json' => false,                 - возвращать json
+	]
+);
+```
+### Пример возвращение данных
+```Array
+(
+    [status] => success
 )
 ```
