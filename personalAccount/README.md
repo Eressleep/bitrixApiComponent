@@ -28,7 +28,7 @@ Array
 
 
 ## Принимаемые параметры для изменения данных
-### валидирует данные, в случае ошибки вернет массив error
+### Валидирует данные, в случае ошибки вернет массив error
 ```
 $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 	'',
