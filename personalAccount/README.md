@@ -51,7 +51,7 @@ $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 Array
 (
     [status] => fail
-    [error] => Array
+    [error]  => Array
         (
             [name] => Invalid name 123Zalupa
             [surname] => Invalid surname asd dsadsad
