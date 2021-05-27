@@ -15,7 +15,7 @@ $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 Array
 (
     [status] => success
-    [data] => Array
+    [data]   => Array
         (
             [name] 	 => Сергей
             [surname] 	 => Иванов
@@ -33,7 +33,7 @@ Array
 $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 	'',
 	[
-		'id'   => 123,                   - id пользователя
+		'id'   		 => 123,                   - id пользователя
 		'changeUserData' =>
 		[
 			'name'       => '123Zalupa',
@@ -53,7 +53,7 @@ Array
     [status] => fail
     [error]  => Array
         (
-            [name] => Invalid name 123Zalupa
+            [name]    => Invalid name 123Zalupa
             [surname] => Invalid surname asd dsadsad
         )
 )
