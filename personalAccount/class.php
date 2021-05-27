@@ -1,14 +1,37 @@
 <?php
 
-if ( ! defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true  )
+if ( ! defined("B_PROLOG_INCLUDED") or B_PROLOG_INCLUDED !== true or !\Bitrix\Main\Loader::includeModule("iblock"))
 	die();
-
-if(!\Bitrix\Main\Loader::includeModule("iblock"))
-	die;
 
 class personalAccount extends CBitrixComponent
 {
+	private function setUserData()
+	{
+		if($this->checkUser() and $this->validateUserDate())
+		{
+			$userData = new CUser();
+			$userData->Update($this->arParams['id'],
+			[
+				"NAME"        => $this->arParams['changeUserData']['name'],
+				'LAST_NAME'   => $this->arParams['changeUserData']['surname'],
+				'SECOND_NAME' => 1,
+				'EMAIL'       => $this->arParams['changeUserData']['mail'],
+			]);
+		}
+		unset($this->arResult['dataObj']);
+	}
+	private function validateUserDate()
+	{
+		foreach ($this->arParams['changeUserData'] as &$date)
+			$date = trim($date);
 
+		if(!filter_var($this->arParams['changeUserData']['mail'],FILTER_VALIDATE_EMAIL))
+			$this->arResult['error']['mail']= "Invalid mail {$this->arParams['changeUserData']['mail']}";
+
+
+		if(sizeof($this->arParams['error']))
+			return false;
+	}
 	private function getUserById()
 	{
 		if($this->checkUser())
@@ -32,6 +55,7 @@ class personalAccount extends CBitrixComponent
 			$this->arResult['dataObj'] = $data;
 			return true;
 		}
+		$this->arResult['error']  = "Invalid user id {$this->arParams['id']}";
 		$this->arResult['status'] = 'fail';
 		return false;
 	}
@@ -43,9 +67,15 @@ class personalAccount extends CBitrixComponent
 				'status' => '',
 				'data'   => '',
 			];
-		$this->getUserById();
+
+		if(sizeof($this->arParams['changeUserData']))
+			$this->setUserData();
+		else
+			$this->getUserById();
+
 		if($this->arParams['json'])
 			$this->arResult = json_encode($this->arResult);
+
 		$this::IncludeComponentTemplate();
 	}
 
