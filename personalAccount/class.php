@@ -19,6 +19,7 @@ class personalAccount extends CBitrixComponent
 			]);
 		}
 		unset($this->arResult['dataObj']);
+		unset($this->arResult['data']);
 	}
 	private function validateUserDate()
 	{
@@ -28,9 +29,23 @@ class personalAccount extends CBitrixComponent
 		if(!filter_var($this->arParams['changeUserData']['mail'],FILTER_VALIDATE_EMAIL))
 			$this->arResult['error']['mail']= "Invalid mail {$this->arParams['changeUserData']['mail']}";
 
+		if(!preg_match('/^[A-Za-z]+$/u',$this->arParams['changeUserData']['name']))
+			$this->arResult['error']['name']= "Invalid name {$this->arParams['changeUserData']['name']}";
 
-		if(sizeof($this->arParams['error']))
+		if(!preg_match('/^[A-Za-z]+$/u',$this->arParams['changeUserData']['surname']))
+			$this->arResult['error']['surname']= "Invalid surname {$this->arParams['changeUserData']['surname']}";
+
+		if(!preg_match('/^[A-Za-z]+$/u',$this->arParams['changeUserData']['patronymic']))
+			$this->arResult['error']['patronymic']= "Invalid patronymic {$this->arParams['changeUserData']['patronymic']}";
+
+		if(sizeof($this->arResult['error']))
+		{
+			$this->arResult['status'] = 'fail';
 			return false;
+		}
+
+
+		return  true;
 	}
 	private function getUserById()
 	{
