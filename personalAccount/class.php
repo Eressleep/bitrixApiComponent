@@ -5,6 +5,12 @@ if ( ! defined("B_PROLOG_INCLUDED") or B_PROLOG_INCLUDED !== true or !\Bitrix\Ma
 
 class personalAccount extends CBitrixComponent
 {
+	private function deleteUserById()
+	{
+		if($this->checkUser($this->arParams['id']))
+			\CUser::Delete($this->arParams['id']);
+		$this->arResult['status'] = 'success';
+	}
 	private function setUserData()
 	{
 		if($this->checkUser() and $this->validateUserDate())
@@ -19,8 +25,6 @@ class personalAccount extends CBitrixComponent
 				'EMAIL'       => $this->arParams['changeUserData']['mail'],
 			]);
 		}
-		unset($this->arResult['dataObj']);
-		unset($this->arResult['data']);
 	}
 	private function validateUserDate()
 	{
@@ -39,8 +43,8 @@ class personalAccount extends CBitrixComponent
 		if(!preg_match('/^[A-Za-z]+$/u',$this->arParams['changeUserData']['patronymic']))
 			$this->arResult['error']['patronymic']= "Invalid patronymic {$this->arParams['changeUserData']['patronymic']}";
 
-		if(!preg_match('/^[A-Za-z]+$/u',$this->arParams['changeUserData']['login']))
-			$this->arResult['error']['login']= "Invalid login {$this->arParams['changeUserData']['login']}";
+//		if(!preg_match('/^[A-Za-z]+$/u',$this->arParams['changeUserData']['login']))
+//			$this->arResult['error']['login']= "Invalid login {$this->arParams['changeUserData']['login']}";
 
 		if(sizeof($this->arResult['error']))
 		{
@@ -61,7 +65,7 @@ class personalAccount extends CBitrixComponent
 					'mail'       => $this->arResult['dataObj']->getEmail(),
 					'login'      => $this->arResult['dataObj']->getLogin(),
 				];
-		unset($this->arResult['dataObj']);
+
 
 	}
 	private function checkUser()
@@ -77,23 +81,26 @@ class personalAccount extends CBitrixComponent
 		$this->arResult['status'] = 'fail';
 		return false;
 	}
-
 	public function executeComponent()
 	{
-		$this->arResult =
-			[
-				'status' => '',
-				'data'   => '',
-			];
+		$requestMethod = \Bitrix\Main\Context::getCurrent()->getRequest()->getRequestMethod();
 
-		if(sizeof($this->arParams['changeUserData']))
-			$this->setUserData();
-		else
+		if ($requestMethod === 'GET')
 			$this->getUserById();
+		elseif (sizeof($this->arParams['changeUserData']) > 0 and $requestMethod === 'POST')
+			$this->setUserData();
+		elseif ($requestMethod === 'DELETE')
+			$this->deleteUserById();
+		else
+		{
+			$this->arResult['status'] = 'fail';
+			$this->arResult['error']  = "Invalid request {$requestMethod}";
+		}
 
-		if($this->arParams['json'])
+		if ($this->arParams['json'])
 			$this->arResult = json_encode($this->arResult);
 
+		unset($this->arResult['dataObj']);
 		$this::IncludeComponentTemplate();
 	}
 
