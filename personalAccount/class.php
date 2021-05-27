@@ -43,8 +43,8 @@ class personalAccount extends CBitrixComponent
 		if(!preg_match('/^[A-Za-z]+$/u',$this->arParams['changeUserData']['patronymic']))
 			$this->arResult['error']['patronymic']= "Invalid patronymic {$this->arParams['changeUserData']['patronymic']}";
 
-//		if(!preg_match('/^[A-Za-z]+$/u',$this->arParams['changeUserData']['login']))
-//			$this->arResult['error']['login']= "Invalid login {$this->arParams['changeUserData']['login']}";
+		if(!preg_match('/^[A-Za-z]+$/u',$this->arParams['changeUserData']['login']))
+			$this->arResult['error']['login']= "Invalid login {$this->arParams['changeUserData']['login']}";
 
 		if(sizeof($this->arResult['error']))
 		{
