@@ -42,7 +42,7 @@ $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 			'mail'       => 'asd@sad.ru',
 			'login'      => 'ssss',
 		],
-		'json' => false,                 - возвращать json
+		'json' => false,                           - возвращать json
 	]
 );
 ```
