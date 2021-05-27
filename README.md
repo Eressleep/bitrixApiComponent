@@ -6,7 +6,7 @@ $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 	'',
 	[
 		'id'   => 123,   - id пользователя
-		'json' => false, - возвращать json или нет
+		'json' => false, - возвращать json
 	]
 );
 ```
