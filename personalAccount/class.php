@@ -15,7 +15,7 @@ class personalAccount extends CBitrixComponent
 			$this->arResult['data'] =
 				[
 					'name'       => $this->arResult['dataObj']->getName(),
-					'surname'    => $this->arResult['dataObj']->getSecondName(),
+					'surname'    => $this->arResult['dataObj']->getLastName(),
 					'patronymic' => $this->arResult['dataObj']->getSecondName(),
 					'mail'       => $this->arResult['dataObj']->getEmail(),
 					'login'      => $this->arResult['dataObj']->getLogin(),
