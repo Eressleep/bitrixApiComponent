@@ -8,12 +8,11 @@ class section extends CBitrixComponent
 	{
 		$sections = \Bitrix\Iblock\SectionTable::getList(
 			[
-				'select' => ['ID', 'NAME', 'SORT'],
+				'select' => ['ID', 'NAME', 'SORT', 'DEPTH_LEVEL', 'IBLOCK_SECTION_ID'],
 				'filter' =>
 					[
-						'IBLOCK_ID'   => 4,
+						'IBLOCK_ID'   => $this->arParams['iblockId'],
 						'ACTIVE'      => 'Y',
-						'DEPTH_LEVEL' => 1,
 					],
 				'cache'  =>
 					[
@@ -21,19 +20,55 @@ class section extends CBitrixComponent
 						'cache_joins' => true,
 					],
 			]
-		)->fetchAll();
-		foreach ($sections as $section)
+		);
+
+		foreach ($sections->fetchCollection() as $section)
 		{
-			$this->arResult[] = $section;
+			if(empty($section->getIblockSectionId()))
+				$this->arResult['section'][$section->getId()]
+					= [
+					'id'   => $section->getId(),
+					'name' => $section->getName(),
+					'sort' => $section->getSort(),
+				];
+			elseif (in_array($section->getIblockSectionId(), array_keys($this->arResult['section'])))
+				$this->arResult['section'][$section->getIblockSectionId()]['children'][$section->getId()]
+					= [
+					'id'   => $section->getId(),
+					'name' => $section->getName(),
+					'sort' => $section->getSort(),
+				];
+			elseif ($section->getDepthLevel() == 3)
+			{
+				foreach ($this->arResult['section'] as &$subSection)
+				{
+					if(in_array($section->getIblockSectionId(), array_keys($subSection['children'])))
+					{
+						$this->arResult['section'][$subSection['id']]['children'][$section->getIblockSectionId()]['children'][]
+							= [
+							'id'   => $section->getId(),
+							'name' => $section->getName(),
+							'sort' => $section->getSort(),
+						];
+						break;
+					}
+				}
+			}
 		}
+		$this->arResult['status'] = 'success';
 	}
 	public function executeComponent()
 	{
-		$this->getSections();
-
-		if($this->arParams['json'])
-			$this->arResult = json_decode($this->arResult);
-
+		if ($this->arParams['method'] === 'GET')
+		{
+			$this->getSections();
+			if($this->arParams['json'])
+				$this->arResult = json_decode($this->arResult);
+		}
+		else
+		{
+			$this->arResult['status'] = 'fail';
+		}
 		$this::IncludeComponentTemplate();
 	}
 }
