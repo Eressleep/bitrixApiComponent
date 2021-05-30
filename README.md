@@ -12,3 +12,4 @@
 ```
 git submodule add -b <component> -f https://github.com/Eressleep/bitrixApiComponent.git local/components/bitrixApiComponent/<component>
 ```
+где ```<component>``` - название компонента, например, ```sections```
