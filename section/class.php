@@ -7,6 +7,7 @@ class section extends CBitrixComponent
 	/**
 	 * Поля и свойство секций
 	 * getElementFields
+	 * @return array
 	 */
 	private function getElementFields($element)
 	{
