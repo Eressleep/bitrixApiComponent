@@ -4,9 +4,11 @@
 $APPLICATION->IncludeComponent('bitrixApiComponent:favorites',
 	'',
 	[
-		'id'       => 24600, - ID пользователя
-		'json'     => false, - не возращать json
-		'method'   => 'GET', - тип запроса
+		'id'        => 24600, - ID пользователя
+		'json'      => false, - не возращать json
+		'method'    => 'GET', - тип запроса
+        'page'      => 2,     - текущая страница
+		'onThePage' => 5,     - избранных товаров на странице
 	]
 );
 ```
@@ -22,13 +24,14 @@ Array
     Array
     (
     [status] => success
-    [data] => Array       - id товаров
+    [data]   => Array       - id товаров
         (
             [0] => 2770
             [1] => 2776
             [2] => 2890
             [3] => 22362
             [4] => 22634
-        )    
+        )
+    [totalPages] => 7 
 )
 ```
