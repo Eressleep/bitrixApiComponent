@@ -9,3 +9,6 @@
 
 ## Git modules - нужно запилить, красиво подключать 
 
+```
+git submodule add -b <component> -f https://github.com/Eressleep/bitrixApiComponent.git local/components/bitrixApiComponent/<component>
+```
