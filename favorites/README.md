@@ -2,6 +2,7 @@
 ## Принимаемые параметры для получения данных 
 ```
 $metod = \Bitrix\Main\Context::getCurrent()->getRequest()->getRequestMethod();
+
 $APPLICATION->IncludeComponent('bitrixApiComponent:favorites',
 	'',
 	[
