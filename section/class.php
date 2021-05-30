@@ -4,7 +4,16 @@ if ( ! defined("B_PROLOG_INCLUDED") or B_PROLOG_INCLUDED !== true or !\Bitrix\Ma
 
 class section extends CBitrixComponent
 {
-	private  function getSections()
+	private function getElementFields($element)
+	{
+		return
+		[
+			'id'   => $element->getId(),
+			'name' => $element->getName(),
+			'sort' => $element->getSort(),
+		];
+	}
+	private function getSections()
 	{
 		$sections = \Bitrix\Iblock\SectionTable::getList(
 			[
@@ -25,19 +34,10 @@ class section extends CBitrixComponent
 		foreach ($sections->fetchCollection() as $section)
 		{
 			if(empty($section->getIblockSectionId()))
-				$this->arResult['section'][$section->getId()]
-					= [
-					'id'   => $section->getId(),
-					'name' => $section->getName(),
-					'sort' => $section->getSort(),
-				];
+				$this->arResult['section'][$section->getId()] = $this->getElementFields($section);
 			elseif (in_array($section->getIblockSectionId(), array_keys($this->arResult['section'])))
 				$this->arResult['section'][$section->getIblockSectionId()]['children'][$section->getId()]
-					= [
-					'id'   => $section->getId(),
-					'name' => $section->getName(),
-					'sort' => $section->getSort(),
-				];
+					= $this->getElementFields($section);
 			elseif ($section->getDepthLevel() == 3)
 			{
 				foreach ($this->arResult['section'] as &$subSection)
@@ -45,11 +45,7 @@ class section extends CBitrixComponent
 					if(in_array($section->getIblockSectionId(), array_keys($subSection['children'])))
 					{
 						$this->arResult['section'][$subSection['id']]['children'][$section->getIblockSectionId()]['children'][]
-							= [
-							'id'   => $section->getId(),
-							'name' => $section->getName(),
-							'sort' => $section->getSort(),
-						];
+							= $this->getElementFields($section);
 						break;
 					}
 				}
