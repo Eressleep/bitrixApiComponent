@@ -62,9 +62,7 @@ class section extends CBitrixComponent
 				$this->arResult = json_decode($this->arResult);
 		}
 		else
-		{
 			$this->arResult['status'] = 'fail';
-		}
 		$this::IncludeComponentTemplate();
 	}
 }
