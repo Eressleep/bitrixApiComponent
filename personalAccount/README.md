@@ -2,12 +2,14 @@
 ## Принимаемые параметры для получения данных
 GET /api/personalAccount
 ```
+$metod = \Bitrix\Main\Context::getCurrent()->getRequest()->getRequestMethod();
+
 $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 	'',
 	[
-		'id'             => 123,                   - id пользователя
-		'methodRequest'  => \Bitrix\Main\Context::getCurrent()->getRequest()->getRequestMethod()
-		'json'           => false,                 - возвращать json
+		'id'             => 123,   - id пользователя
+		'methodRequest'  => metod  - тип метода(GET)
+		'json'           => false, - возвращать json
 	]
 );
 ```
@@ -31,11 +33,13 @@ Array
 POST /api/personalAccount
 
 ```
+$metod = \Bitrix\Main\Context::getCurrent()->getRequest()->getRequestMethod();
+
 $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 	'',
 	[
-		'id'   => 123,                   - id пользователя
-		'methodRequest'  => \Bitrix\Main\Context::getCurrent()->getRequest()->getRequestMethod()
+		'id'   => 123,                   	- id пользователя
+		'methodRequest'  => $metod, 		- тип метода(POST)
 		'changeUserData' =>
 		[
 			'name'       => '123Zalupa',
@@ -44,7 +48,7 @@ $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 			'mail'       => 'asd@sad.ru',
 			'login'      => 'ssss',
 		],
-		'json' => false,                 - возвращать json
+		'json' => false,                 	- возвращать json
 	]
 );
 ```
@@ -58,12 +62,14 @@ Array
 ## Принимаемые параметры для удаления пользователя
 DELETE /api/personalAccount
 ```
+$metod = \Bitrix\Main\Context::getCurrent()->getRequest()->getRequestMethod();
+
 $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 	'',
 	[
-		'id'             => 123,                   - id пользователя
-		'methodRequest'  => \Bitrix\Main\Context::getCurrent()->getRequest()->getRequestMethod()
-		'json'           => false,                 - возвращать json
+		'id'             => 123,   - id пользователя
+		'methodRequest'  => $metod - тип метода(DELETE)
+		'json'           => false, - возвращать json
 	]
 );
 ```
