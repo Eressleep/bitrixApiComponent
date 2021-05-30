@@ -7,5 +7,5 @@
 - [Избранные пользователя](https://github.com/Eressleep/bitrixApiComponent/tree/favorites/favorites)
 
 
-## Git modules - нужно запилить красиво подключать 
+## Git modules - нужно запилить, красиво подключать 
 
