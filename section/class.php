@@ -4,6 +4,10 @@ if ( ! defined("B_PROLOG_INCLUDED") or B_PROLOG_INCLUDED !== true or !\Bitrix\Ma
 
 class section extends CBitrixComponent
 {
+	/**
+	 * Поля и свойство секций
+	 * getElementFields
+	 */
 	private function getElementFields($element)
 	{
 		return
@@ -13,6 +17,10 @@ class section extends CBitrixComponent
 			'sort' => $element->getSort(),
 		];
 	}
+	/**
+	 * Достает секции до 3 уровня вложенности, строя граф
+	 * getSections
+	 */
 	private function getSections()
 	{
 		$sections = \Bitrix\Iblock\SectionTable::getList(
