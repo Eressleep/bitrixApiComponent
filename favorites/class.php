@@ -3,12 +3,13 @@ class favorites extends CBitrixComponent
 {
 
 	/**
-	 * Проверяют на наличие пользователя
-	 * checkUser
+	 * Обновляет поля пользователя по id
+	 * @param  arParams['id']
+	 * @return void
 	 */
 	private function checkUser()
 	{
-		$data = $user = \Bitrix\Main\UserTable::getList([
+		$data = \Bitrix\Main\UserTable::getList([
 			'filter' => ['=ID' => $this->arParams['id'],],
 			'select' => ['ID','UF_FAVORIT'],
 			'cache'  =>
@@ -30,7 +31,7 @@ class favorites extends CBitrixComponent
 	}
 	/**
 	 * Достает избранные товары пользователя
-	 * getFavorites
+	 * @return void
 	 */
 	private function getFavorites()
 	{
@@ -38,10 +39,15 @@ class favorites extends CBitrixComponent
 		{
 			$this->arResult['data'] =
 				array_chunk($this->arResult['dataObj']->getUfFavorit(), $this->arParams['onThePage']);
-
 			$this->arResult['totalPages'] = sizeof($this->arResult['data']);
-
-			$this->arResult['data'] = $this->arResult['data'][$this->arParams['page']];
+			if($this->arParams['page'] > sizeof($this->arResult['data']))
+			{
+				$this->arResult['error']  = "Invalid page {$this->arParams['page']}";
+				$this->arResult['status'] = 'fail';
+				unset($this->arResult['data']);
+			}
+			else
+				$this->arResult['data'] = $this->arResult['data'][$this->arParams['page']];
 		}
 		unset($this->arResult['dataObj']);
 	}
