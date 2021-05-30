@@ -5,12 +5,22 @@ if ( ! defined("B_PROLOG_INCLUDED") or B_PROLOG_INCLUDED !== true or !\Bitrix\Ma
 
 class personalAccount extends CBitrixComponent
 {
+	/**
+	 * Удаляет пользователя по id
+	 * @param  arParams['id']
+	 * @return void
+	 */
 	private function deleteUserById()
 	{
 		if($this->checkUser($this->arParams['id']))
 			\CUser::Delete($this->arParams['id']);
 		$this->arResult['status'] = 'success';
 	}
+	/**
+	 * Обновляет поля пользователя по id
+	 * @param  arParams['id']
+	 * @return void
+	 */
 	private function setUserData()
 	{
 		if($this->checkUser() and $this->validateUserDate())
@@ -26,6 +36,11 @@ class personalAccount extends CBitrixComponent
 			]);
 		}
 	}
+	/**
+	 * Валидирует дпнные из arParams
+	 * @param  arParams
+	 * @return bool
+	 */
 	private function validateUserDate()
 	{
 		foreach ($this->arParams['changeUserData'] as &$date)
@@ -54,6 +69,11 @@ class personalAccount extends CBitrixComponent
 
 		return  true;
 	}
+	/**
+	 * Получает данные пользователя по id
+	 * @param  arParams
+	 * @return void
+	 */
 	private function getUserById()
 	{
 		if($this->checkUser())
@@ -68,6 +88,11 @@ class personalAccount extends CBitrixComponent
 
 
 	}
+	/**
+	 * Проверяют на наличие пользователя
+	 * @param  arParams['id]
+	 * @return bool
+	 */
 	private function checkUser()
 	{
 		$data = \Bitrix\Main\UserTable::getByPrimary($this->arParams['id'])->fetchObject();
