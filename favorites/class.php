@@ -3,9 +3,40 @@ class favorites extends CBitrixComponent
 {
 
 	/**
-	 * Обновляет поля пользователя по id
-	 * @param  arParams['id']
+	 * Достает поля и свойства товара
+	 * @param  $arResult['data'][$this->arParams['page']
 	 * @return void
+	 */
+	private function getProductData()
+	{
+		$dataProducts = \Bitrix\Iblock\ElementTable::getList((
+			[
+				'select' => ['ID', 'NAME',],
+				'filter' =>
+					[
+						'IBLOCK_ID' => 5,
+						'ID'        => array_values($this->arResult['data']),
+					],
+				'cache'  =>
+					[
+	                   'ttl'         => 3600,
+	                   'cache_joins' => true,
+					],
+			]
+		));
+		unset($this->arResult['data']);
+		foreach ($dataProducts->fetchCollection() as $dataItem)
+			$this->arResult['data'][] =
+			[
+				'id'   => $dataItem->getId(),
+				'name' => $dataItem->getName(),
+			];
+
+	}
+	/**
+	 * Проверяют наличие пользователя
+	 * @param  arParams['id']
+	 * @return bool
 	 */
 	private function checkUser()
 	{
@@ -40,6 +71,7 @@ class favorites extends CBitrixComponent
 			$this->arResult['data'] =
 				array_chunk($this->arResult['dataObj']->getUfFavorit(), $this->arParams['onThePage']);
 			$this->arResult['totalPages'] = sizeof($this->arResult['data']);
+
 			if($this->arParams['page'] > sizeof($this->arResult['data']))
 			{
 				$this->arResult['error']  = "Invalid page {$this->arParams['page']}";
@@ -47,13 +79,17 @@ class favorites extends CBitrixComponent
 				unset($this->arResult['data']);
 			}
 			else
+			{
 				$this->arResult['data'] = $this->arResult['data'][$this->arParams['page']];
+				$this->getProductData();
+			}
 		}
 		unset($this->arResult['dataObj']);
 	}
 
 	public function executeComponent()
 	{
+
 		if($this->arParams['method'] == 'GET')
 			$this->getFavorites();
 		else
