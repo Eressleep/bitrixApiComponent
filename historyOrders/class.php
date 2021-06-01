@@ -20,25 +20,44 @@ class historyOrders extends CBitrixComponent
 		return false;
 	}
 	/**
-	 * Проверяют наличие пользователя
-	 * @param  $order
-	 * @return array
+	 * Получают товары заказа
+	 * @param  $arResult['data']
+	 * @return void
 	 */
-	private function getOrder($order)
+	private function getOrderItems()
 	{
-		$order = \Bitrix\Sale\Order::load($order);
+		foreach ($this->arResult['data'] as &$data)
+		{
+			$products = \Bitrix\Sale\Internals\BasketTable::getList(
+				[
+					'filter' => ['ORDER_ID' => $data['ID']],
+					'select' => ['ID','NAME', 'PRICE', 'QUANTITY'],
+					'cache'  => [
+						'ttl'         => 3600,
+						'cache_joins' => true,
+					],
+				]);
 
-		return
-			[
-				'id'            => $order->getField("ID"),
-				'price'         => $order->getField("PRICE"),
-				'payed'         => $order->getField("PAYED"),
-				'status'        => $order->getField("STATUS_ID"),
-				'dataPayed'     => $order->getField("DATE_PAYED"),
-				'comment'       => $order->getField("USER_DESCRIPTION"),
-				'priceDelevery' => $order->getField("PRICE_DELIVERY"),
-			];
+			foreach ($products->fetchCollection() as $item)
+				$data['products'][] =
+					[
+						'id'    => $item->getId(),
+						'name'  => $item->getName(),
+						'cnt'   => $item->getQuantity(),
+						'price' => $item->getPrice(),
+					];
+			$data['PAY_SYSTEM_ID'] = \Bitrix\Sale\Delivery\Services\Table::getList([
+				'filter' => ['ACTIVE' => 'Y','ID' => $data['PAY_SYSTEM_ID']],
+			])->fetchObject()->collectValues();
+
+			unset($data['ID']);
+		}
 	}
+	/**
+	 * Проверяют наличие пользователя
+	 * @param  $arResult['data']
+	 * @return void
+	 */
 	private function getHistoryOrders()
 	{
 		if($this->checkUser() and CModule::IncludeModule('sale'))
@@ -46,10 +65,16 @@ class historyOrders extends CBitrixComponent
 			$ordersItems = \Bitrix\Sale\Internals\OrderTable::getList(
 				[
 					'filter' => ['USER_ID' => $this->arParams['id']],
-					'select' => ['ID','PRICE'],
-				])->fetchAll();
-			$ordersItems = array_chunk($ordersItems,$this->arParams['onThePage']);
-			$this->arResult['totalPages'] = sizeof($ordersItems);
+					'select' => ['ID', 'DELIVERY_ID','PRICE_DELIVERY','PRICE','PAY_SYSTEM_ID',],
+					'cache'  => [
+						'ttl'         => 3600,
+						'cache_joins' => true,
+					],
+				]);
+			$ordersItemsPagen = $ordersItems->fetchAll();
+
+			$ordersItemsPagen = array_chunk($ordersItemsPagen,$this->arParams['onThePage']);
+			$this->arResult['totalPages'] = sizeof($ordersItemsPagen);
 
 			if($this->arParams['page']-1 > $this->arResult['totalPages']-1)
 			{
@@ -58,12 +83,14 @@ class historyOrders extends CBitrixComponent
 			}
 			else
 			{
-				$this->arResult['data'] = $ordersItems[$this->arParams['page']-1];
+				$this->arResult['data'] = $ordersItemsPagen[$this->arParams['page']-1];
+				$this->getOrderItems();
 			}
 
 		}
 		unset($this->arResult['dataObj']);
 	}
+
 	public function executeComponent()
 	{
 
