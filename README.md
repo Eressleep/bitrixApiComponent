@@ -9,6 +9,7 @@
 - [Личные данные пользователя и изменения их(удаление самого пользователя)](https://github.com/Eressleep/bitrixApiComponent/tree/personalAccount/personalAccount)
 - [Список разделов](https://github.com/Eressleep/bitrixApiComponent/tree/section/section)
 - [Избранные пользователя](https://github.com/Eressleep/bitrixApiComponent/tree/favorites/favorites)
+- [История заказов](https://github.com/Eressleep/bitrixApiComponent/tree/historyOrders/historyOrders)
 
 
 ## Git modules
