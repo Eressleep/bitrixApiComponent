@@ -46,12 +46,10 @@ class historyOrders extends CBitrixComponent
 			$ordersItems = \Bitrix\Sale\Internals\OrderTable::getList(
 				[
 					'filter' => ['USER_ID' => $this->arParams['id']],
-					'select' => ['ID'],
+					'select' => ['ID','PRICE'],
 				])->fetchAll();
 			$ordersItems = array_chunk($ordersItems,$this->arParams['onThePage']);
 			$this->arResult['totalPages'] = sizeof($ordersItems);
-
-
 
 			if($this->arParams['page']-1 > $this->arResult['totalPages']-1)
 			{
