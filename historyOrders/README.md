@@ -29,7 +29,7 @@ Array
                     [PRICE]          => 1258785.0000  - общая цена заказа
                     [PAY_SYSTEM_ID]  => Array         - описание доставки
                         (
-                            [NAME]        => Доставка slave
+                            [NAME]        => Доставка Gachimuchi
                             [DESCRIPTION] => Доставка вы серьезно ?
                         )
 
