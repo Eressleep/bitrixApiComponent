@@ -46,8 +46,15 @@ class historyOrders extends CBitrixComponent
 						'cnt'   => $item->getQuantity(),
 						'price' => $item->getPrice(),
 					];
-			$data['PAY_SYSTEM_ID'] = \Bitrix\Sale\Delivery\Services\Table::getList([
-				'filter' => ['ACTIVE' => 'Y','ID' => $data['PAY_SYSTEM_ID']],
+			$data['PAY_SYSTEM_ID'] = \Bitrix\Sale\Delivery\Services\Table::getList(
+				[
+					'filter' => ['ACTIVE' => 'Y','ID' => $data['PAY_SYSTEM_ID'],
+					'cache'  =>
+						[
+							'ttl'         => 3600,
+							'cache_joins' => true,
+						],
+					],
 			])->fetchObject()->collectValues();
 
 			unset($data['ID']);
