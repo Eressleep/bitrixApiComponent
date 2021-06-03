@@ -1,5 +1,5 @@
 # Битрикс компоненты для restApi
-Компоненты которые  получились при споре с душнилой
+<p align="center">Компоненты которые  получились при споре с душнилой</p>
 <p align="center">
   <img src="https://www.intervolga.ru/upload/medialibrary/712/712cd23ab77b7f514419acefc048805f.jpg">
 </p>
