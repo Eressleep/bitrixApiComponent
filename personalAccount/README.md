@@ -7,9 +7,9 @@ $metod = \Bitrix\Main\Context::getCurrent()->getRequest()->getRequestMethod();
 $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 	'',
 	[
-		'id'             => 123,   - id пользователя
-		'methodRequest'  => metod  - тип метода(GET)
-		'json'           => false, - возвращать json
+		'id'             => 123,   //- id пользователя
+		'methodRequest'  => metod  //- тип метода(GET)
+		'json'           => false, //- возвращать json
 	]
 );
 ```
@@ -38,8 +38,8 @@ $metod = \Bitrix\Main\Context::getCurrent()->getRequest()->getRequestMethod();
 $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 	'',
 	[
-		'id'   => 123,                   	- id пользователя
-		'methodRequest'  => $metod, 		- тип метода(POST)
+		'id'   => 123,                   	//- id пользователя
+		'methodRequest'  => $metod, 		//- тип метода(POST)
 		'changeUserData' =>
 		[
 			'name'       => '123Zalupa',
@@ -48,7 +48,7 @@ $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 			'mail'       => 'asd@sad.ru',
 			'login'      => 'ssss',
 		],
-		'json' => false,                 	- возвращать json
+		'json' => false,                 	//- возвращать json
 	]
 );
 ```
@@ -67,9 +67,9 @@ $metod = \Bitrix\Main\Context::getCurrent()->getRequest()->getRequestMethod();
 $APPLICATION->IncludeComponent('bitrixApiComponent:personalAccount',
 	'',
 	[
-		'id'             => 123,   - id пользователя
-		'methodRequest'  => $metod - тип метода(DELETE)
-		'json'           => false, - возвращать json
+		'id'             => 123,   //- id пользователя
+		'methodRequest'  => $metod //- тип метода(DELETE)
+		'json'           => false, //- возвращать json
 	]
 );
 ```
