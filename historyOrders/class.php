@@ -38,6 +38,8 @@ class historyOrders extends CBitrixComponent
 					],
 				]);
 
+			$data['DATE_STATUS'] = date($data['DATE_STATUS']->getFormat(),$data['DATE_STATUS']->getTimestamp());
+
 			foreach ($products->fetchCollection() as $item)
 				$data['products'][] =
 					[
@@ -46,16 +48,6 @@ class historyOrders extends CBitrixComponent
 						'cnt'   => $item->getQuantity(),
 						'price' => $item->getPrice(),
 					];
-			$data['PAY_SYSTEM_ID'] = \Bitrix\Sale\Delivery\Services\Table::getList(
-				[
-					'filter' => ['ACTIVE' => 'Y','ID' => $data['PAY_SYSTEM_ID'],
-					'cache'  =>
-						[
-							'ttl'         => 3600,
-							'cache_joins' => true,
-						],
-					],
-			])->fetchObject()->collectValues();
 
 			unset($data['ID']);
 		}
@@ -72,7 +64,7 @@ class historyOrders extends CBitrixComponent
 			$ordersItems = \Bitrix\Sale\Internals\OrderTable::getList(
 				[
 					'filter' => ['USER_ID' => $this->arParams['id']],
-					'select' => ['ID', 'DELIVERY_ID','PRICE_DELIVERY','PRICE','PAY_SYSTEM_ID',],
+					'select' => ['ID', 'DELIVERY_ID','PRICE_DELIVERY','PRICE','PAY_SYSTEM_ID','DATE_STATUS'],
 					'cache'  => [
 						'ttl'         => 3600,
 						'cache_joins' => true,
@@ -102,9 +94,7 @@ class historyOrders extends CBitrixComponent
 	{
 
 		if($this->arParams['method'] == 'GET')
-		{
 			$this->getHistoryOrders();
-		}
 		else
 			$this->arResult['error'] = "Invalid request {$this->arParams['method']}";
 
