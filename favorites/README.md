@@ -6,11 +6,11 @@ $metod = \Bitrix\Main\Context::getCurrent()->getRequest()->getRequestMethod();
 $APPLICATION->IncludeComponent('bitrixApiComponent:favorites',
 	'',
 	[
-		'id'        => 24600,  - ID пользователя
-		'json'      => false,  - не возращать json
-		'method'    => $metod, - тип запроса
-        	'page'      => 2,      - текущая страница
-		'onThePage' => 5,      - избранных товаров на странице
+		'id'        => 24600,  //- ID пользователя
+		'json'      => false,  //- не возращать json
+		'method'    => $metod, //- тип запроса
+        	'page'      => 2,      //- текущая страница
+		'onThePage' => 5,      //- избранных товаров на странице
 	]
 );
 ```
