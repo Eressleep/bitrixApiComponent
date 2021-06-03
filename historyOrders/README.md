@@ -25,9 +25,10 @@ Array
             [0] => Array  - заказы
                 (
                     [DELIVERY_ID]    => 17
-                    [PRICE_DELIVERY] => 1599.0000     - цена доставки 
-                    [PRICE]          => 1258785.0000  - общая цена заказа
-                    [PAY_SYSTEM_ID]  => Array         - описание доставки
+                    [PRICE_DELIVERY] => 1599.0000           - цена доставки 
+                    [PRICE]          => 1258785.0000        - общая цена заказа
+                    [DATE_STATUS]    => 30.04.2021 14:41:59 - время создание заказа
+                    [PAY_SYSTEM_ID]  => Array               - описание доставки
                         (
                             [NAME]        => Доставка Gachimuchi
                             [DESCRIPTION] => Доставка вы серьезно ?
