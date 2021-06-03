@@ -2,7 +2,7 @@
 # Битрикс компоненты для restApi
 Компоненты которые  получились при споре с душнилой
 <p align="center"> 
-  <img src="https://lh3.googleusercontent.com/proxy/DyRoNpMwZMMRQ1k6-95aFHQOcmex9PRyuI9ehq3DDU1W2HlDIk9TPPDbnV6fs4Jkoq8gvUehuevnyc5LgSwOk-1qmSo>
+  <img src="http://memesmix.net/media/created/7pqpzd.jpg">
 </p>
 
 ## https://www.notion.so/05bb771577454172933c9f86f4b18848
