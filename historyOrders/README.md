@@ -20,9 +20,9 @@ Array
 (
     [status] => success - статутс запроса
     [totalPages] => 2   - всего старниц
-    [data] => Array     - массив то
+    [data] => Array 	- массив товаров заказов
         (
-            [0] => Array  - заказы
+            [0] => Array  
                 (
                     [DELIVERY_ID]    => 17
                     [PRICE_DELIVERY] => 1599.0000           - цена доставки 
