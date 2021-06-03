@@ -5,9 +5,9 @@ GET /api/personalAccount
 $APPLICATION->IncludeComponent('bitrixApiComponent:section',
 	'',
 	[
-		'iblockId' => 4,     - название инфоблока секций
-		'json'     => false, - возращение данных
-		'method'   => 'GET', - принимает токлько get 
+		'iblockId' => 4,     //- название инфоблока секций
+		'json'     => false, //- возращение данных
+		'method'   => 'GET', //- принимает токлько get 
 	]
 );
 ```
