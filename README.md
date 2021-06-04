@@ -11,11 +11,11 @@
 - [Список разделов](https://github.com/Eressleep/bitrixApiComponent/tree/section/section)
 - [Избранные пользователя](https://github.com/Eressleep/bitrixApiComponent/tree/favorites/favorites)
 - [История заказов](https://github.com/Eressleep/bitrixApiComponent/tree/historyOrders/historyOrders)
-
+- [Детальная товара](https://github.com/Eressleep/bitrixApiComponent/tree/detailProducts/detailProducts)
 Еще не готово
 - корзина
 - оформление
-- Детальная товара
+
 - поиск 
 
 ## добавить swagger
