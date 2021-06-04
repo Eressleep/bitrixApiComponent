@@ -9,3 +9,15 @@ $APPLICATION->IncludeComponent('bitrixApiComponent:detailProducts',
 		'json' => false, - // возращать json
 	]);
 ```
+```
+Array
+(
+    [status] => success
+    [item] => Array
+        (
+            [id] => 3039
+            [name] => Диван угловой Беата
+        )
+
+)
+```
