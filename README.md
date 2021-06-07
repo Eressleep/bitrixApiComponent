@@ -19,7 +19,7 @@
 
 - поиск 
 
-## <span style = "color:red">добавить swagger<span>
+## <span style="color: red;">добавить swagger<span>
 
 
 ## Git modules
