@@ -3,6 +3,7 @@ if ( ! defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 	die();
 
 \Bitrix\Main\Loader::includeModule("iblock");
+
 class detailProducts extends CBitrixComponent
 {
 
@@ -36,7 +37,8 @@ class detailProducts extends CBitrixComponent
 	 */
 	private function getFields()
 	{
-		$this->arResult['item'] = [
+		$this->arResult['item'] =
+		[
 			'id'   => $this->arResult['dataObj']->getId(),
 			'name' => $this->arResult['dataObj']->getName(),
 		];
