@@ -25,21 +25,21 @@ Array
 (
     Array
     (
-    [status] => success
-    [data]   => Array       - товаровы
-        (
-            [0] => Array
-                (
-                    [id] => 3416
-                    [name] => Диван Гейша
-                )
+	    [status] => success
+	    [data]   => Array       - товаровы
+		(
+		    [0] => Array
+			(
+			    [id] => 3416
+			    [name] => Диван Гейша
+			)
 
-            [1] => Array
-                (
-                    [id] => 3421
-                    [name] => Диван Гейша
-                )
-        )
-    [totalPages] => 7       - всего страниц
+		    [1] => Array
+			(
+			    [id] => 3421
+			    [name] => Диван Гейша
+			)
+		)
+	    [totalPages] => 7       - всего страниц
 )
 ```
